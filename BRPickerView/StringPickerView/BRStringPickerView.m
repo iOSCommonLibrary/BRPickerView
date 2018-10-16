@@ -26,6 +26,7 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
 @property (nonatomic, strong) NSArray *dataSourceArr;
 // 单列选择的值
 @property (nonatomic, strong) NSString *selectValue;
+@property(nonatomic, assign) NSInteger selectRow;/**< 选择的下标*/
 // 多列选择的值
 @property (nonatomic, strong) NSMutableArray *selectValueArr;
 
@@ -145,6 +146,7 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
             self.selectValue = [self.dataSourceArr firstObject];
         }
         NSInteger row = [self.dataSourceArr indexOfObject:self.selectValue];
+        self.selectRow = row;
         // 默认滚动的行
         [self.pickerView selectRow:row inComponent:0 animated:NO];
     } else if (self.type == BRStringPickerComponentMore) {
@@ -227,10 +229,11 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
         case BRStringPickerComponentSingle:
         {
             self.selectValue = self.dataSourceArr[row];
+            self.selectRow = row;
             // 设置是否自动回调
             if (self.isAutoSelect) {
                 if(self.resultBlock) {
-                    self.resultBlock(self.selectValue);
+                    self.resultBlock(self.selectValue,self.selectRow);
                 }
             }
         }
@@ -250,7 +253,7 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
             // 设置是否自动回调
             if (self.isAutoSelect) {
                 if(self.resultBlock) {
-                    self.resultBlock([self.selectValueArr copy]);
+                    self.resultBlock([self.selectValueArr copy],0);
                 }
             }
         }
@@ -315,9 +318,9 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
     // 点击确定按钮后，执行block回调
     if(_resultBlock) {
         if (self.type == BRStringPickerComponentSingle) {
-            _resultBlock(self.selectValue);
+            _resultBlock(self.selectValue,self.selectRow);
         } else if (self.type == BRStringPickerComponentMore) {
-            _resultBlock(self.selectValueArr);
+            _resultBlock(self.selectValueArr,0);
         }
     }
 }

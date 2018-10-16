@@ -9,7 +9,7 @@
 
 #import "BRBaseView.h"
 
-typedef void(^BRStringResultBlock)(id selectValue);
+typedef void(^BRStringResultBlock)(id selectValue,NSInteger selectRow);
 typedef void(^BRStringCancelBlock)(void);
 
 @interface BRStringPickerView : BRBaseView
