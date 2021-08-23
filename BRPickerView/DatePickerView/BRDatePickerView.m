@@ -466,6 +466,11 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
         _datePicker.datePickerMode = _datePickerMode;
         // 设置该UIDatePicker的国际化Locale，以简体中文习惯显示日期，UIDatePicker控件默认使用iOS系统的国际化Locale
         _datePicker.locale = [[NSLocale alloc]initWithLocaleIdentifier:@"zh_CHS_CN"];
+        if (@available(iOS 13.4, *)) {
+            _datePicker.preferredDatePickerStyle = UIDatePickerStyleWheels;
+        } else {
+            // Fallback on earlier versions
+        }
         // textColor 隐藏属性，使用KVC赋值
         // [_datePicker setValue:[UIColor blackColor] forKey:@"textColor"];
         // 设置时间范围
