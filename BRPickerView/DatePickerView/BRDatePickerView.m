@@ -481,7 +481,7 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
              _datePicker.maximumDate = self.maxLimitDate;
         }
         // 滚动改变值的响应事件
-        [_datePicker addTarget:self action:@selector(didSelectValueChanged:) forControlEvents:UIControlEventValueChanged];
+//        [_datePicker addTarget:self action:@selector(didSelectValueChanged:) forControlEvents:UIControlEventValueChanged];
     }
     return _datePicker;
 }
