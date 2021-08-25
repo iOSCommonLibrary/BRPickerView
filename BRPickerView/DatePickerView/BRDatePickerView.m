@@ -782,7 +782,7 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
 
 #pragma mark - 确定按钮的点击事件
 - (void)clickRightBtn {
-    self.selectDate = sender.date;
+    self.selectDate = self.datePicker.date;
     
     BOOL selectLessThanMin = [self.selectDate br_compare:self.minLimitDate format:self.selectDateFormatter] == NSOrderedAscending;
     BOOL selectMoreThanMax = [self.selectDate br_compare:self.maxLimitDate format:self.selectDateFormatter] == NSOrderedDescending;
